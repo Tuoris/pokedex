@@ -64,10 +64,10 @@ body {
 }
 
 @media screen and (min-width: 769px) {
-    .info-card {
-        position: fixed;
-        max-height: calc(100vh - 8.5rem);
-        overflow-y: scroll;
-        width: 25%;
-    }
+  .info-card {
+    position: fixed;
+    max-height: calc(100vh - 8.5rem);
+    overflow-y: scroll;
+    width: 25%;
+  }
 }

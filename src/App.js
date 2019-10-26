@@ -19,7 +19,7 @@ function PokeCard(props) {
               .map((type, index) => {
                 let poketypeClassName = `poketype-${type}`;
                 return <button
-                  className={"poketype btn m-1 " + poketypeClassName }
+                  className={"poketype btn m-1 " + poketypeClassName}
                   key={type}
                   onClick={() => props.pokemonSelectCallback({ index, type, ...props })}
                 >{type}</button>
@@ -38,7 +38,7 @@ function formatIndex(index) {
 }
 
 function PokeInfo(props) {
-  let {pokemon} = props;
+  let { pokemon } = props;
   let fields = {
     "Type": (pokemon.type),
     ...pokemon.stats
