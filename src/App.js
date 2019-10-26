@@ -62,9 +62,12 @@ function PokeInfo(props) {
               }
             </tbody>
           </table>
+          <div className="pokeinfo-unselect text-center mt-2">
+            <button className="btn btn-success" onClick={props.pokemonUnselectCallback}>Close</button>
+          </div>
         </div>
       </div>
-      <div className="modal-back"></div>
+      <div className="modal-back" onClick={props.pokemonUnselectCallback}></div>
     </div>
   )
 }
@@ -128,6 +131,10 @@ class App extends React.Component {
     this.setState({ selected_pokemon: pokemon });
   }
 
+  UnselectPokemon(pokemon) {
+    this.setState({ selected_pokemon: null });
+  }
+
   render() {
     return (
       <div className="app container mb-4">
@@ -152,7 +159,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="poke-info col-md-4 px-1 py-1">
-            {this.state.selected_pokemon ? <PokeInfo pokemon={this.state.selected_pokemon} /> : null}
+            {this.state.selected_pokemon ? <PokeInfo pokemon={this.state.selected_pokemon} pokemonUnselectCallback={() => this.UnselectPokemon()} /> : null}
           </div>
         </div>
       </div>

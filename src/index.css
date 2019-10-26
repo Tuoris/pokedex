@@ -1,10 +1,10 @@
 body {
-    background: #f0f0f0;
+  background: #f0f0f0;
 }
 
 .pokename,
 .poketype {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .poketype,
@@ -20,20 +20,45 @@ body {
 }
 
 .info-card {
-    z-index: 100;
+  z-index: 100;
 }
 
 .modal-back {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 99;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 99;
 }
 
 .button-load {
-    width: 100%;
+  width: 100%;
+}
+
+.pokeinfo-unselect {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .poke-info {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .info-card {
+    max-height: calc(100vh - 5rem);
+    overflow: scroll;
+  }
+
+  .modal-back {
+    display: block;
+  }
+
+  .pokeinfo-unselect {
+    display: block;
+  }
 }
