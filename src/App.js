@@ -12,10 +12,17 @@ function PokeCard(props) {
       </div>
       <div className="card-body pt-2">
         <h5 className="pokename card-title text-center">{props.name}</h5>
-        <div className="poketypes-wrapper">
+        <div className="poketypes-wrapper text-center">
           {
             props.types
-              .map(type => <button className="poketype btn btn-primary m-1" key={type}>{type}</button>)
+              .map((type, index) => {
+                return <button
+                  className="poketype btn btn-primary m-1"
+                  key={type}
+                  onClick={() => props.pokemonSelectCallback({ index, type, ...props })}
+                >{type}</button>
+              }
+              )
           }
         </div>
 
@@ -24,27 +31,33 @@ function PokeCard(props) {
   )
 }
 
-function PokeInfo() {
+function formatIndex(index) {
+  return '#' + index.toString().padStart(3, '0');
+}
+
+function PokeInfo(props) {
+  let {pokemon} = props;
+  let fields = {
+    "Type": (pokemon.type),
+    ...pokemon.stats
+  }
   return (
     <div>
       <div className="card info-card my-1 mx-1">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png" className="card-img-top" alt="pokemon ditto" />
+        <img src={pokemon.image_url} className="card-img-top" alt={"pokemon " + pokemon.name} />
         <div className="card-body">
-          <h5 className="poketype card-title text-center">ditto #0004</h5>
-          <table className="table">
+          <h5 className="poketype card-title font-weight-bold text-center">{pokemon.name} {formatIndex(pokemon.index)}</h5>
+          <table className="table table-bordered text-center text-capitalize mb-0">
             <tbody>
-              <tr>
-                <th>Type</th>
-                <td>Fire</td>
-              </tr>
-              <tr>
-                <th>Attack</th>
-                <td>52</td>
-              </tr>
-              <tr>
-                <th>...</th>
-                <td>...</td>
-              </tr>
+              {
+                Object.keys(fields)
+                  .map(key => {
+                    return (<tr key={key}>
+                      <td>{key}</td>
+                      <td>{fields[key]}</td>
+                    </tr>)
+                  })
+              }
             </tbody>
           </table>
         </div>
@@ -59,7 +72,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       pokemons: [],
-      pokemons_next_page_url: undefined,
+      selected_pokemon: null,
+      pokemons_next_page_url: null,
       pokemon_types: [],
       isNextPageAvailable: true,
     }
@@ -85,24 +99,47 @@ class App extends React.Component {
     this.fetchPokemons()
   }
 
+  extractPokemonStats(pokemon) {
+    let api_stats = pokemon.stats;
+    let stats = {}
+    stats["Attack"] = api_stats[4].base_stat;
+    stats["Defence"] = api_stats[3].base_stat;
+    stats["HP"] = api_stats[5].base_stat;
+    stats["SP Attack"] = api_stats[2].base_stat;
+    stats["SP Defence"] = api_stats[1].base_stat;
+    stats["Speed"] = api_stats[0].base_stat;
+    stats["Weight"] = pokemon.weight;
+    stats["Total moves"] = pokemon.moves.length;
+    return stats;
+  }
+
+  extractAllPokemonProperties(pokemon) {
+    return {
+      image_url: pokemon.sprites.front_default,
+      name: pokemon.name,
+      types: pokemon.types.map(el => el.type.name),
+      stats: this.extractPokemonStats(pokemon),
+    }
+  }
+
+  dispaySelectedPokemon(pokemon) {
+    this.setState({ selected_pokemon: pokemon });
+  }
+
   render() {
     return (
       <div className="app container mb-4">
         <h1 className="text-center">Pokedex</h1>
         <div className="row">
-          <div className="poke-cards col-sm-8">
+          <div className="poke-cards col-md-8 cold-md-8">
             <div className="row px-1 py-1">
               {
                 this.state.pokemons
                   .map(pokemon => {
-                    let props = {
-                      image_url: pokemon.sprites.front_default,
-                      name: pokemon.name,
-                      types: pokemon.types.map(el => el.type.name)
-                    };
+                    let props = this.extractAllPokemonProperties(pokemon);
                     return (
-                      <div className="col-sm-6 col-md-4 px-1 py-1" key={pokemon.key}>
-                        <PokeCard {...props} />
+                      <div className="col-sm-6 col-md-4 px-1 py-1" key={pokemon.name}>
+                        <PokeCard {...props} pokemonSelectCallback={pokemon => this.dispaySelectedPokemon(pokemon)} />
                       </div>
                     )
                   })
@@ -112,8 +149,8 @@ class App extends React.Component {
               <button className="button-load btn btn-primary mx-2" onClick={() => this.fetchPokemons()}>Load More</button>
             </div>
           </div>
-          <div className="poke-info col-sm-4 px-1 py-1">
-            <PokeInfo />
+          <div className="poke-info col-md-4 px-1 py-1">
+            {this.state.selected_pokemon ? <PokeInfo pokemon={this.state.selected_pokemon} /> : null}
           </div>
         </div>
       </div>
