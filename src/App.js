@@ -46,9 +46,11 @@ function PokeInfo(props) {
   return (
     <div>
       <div className="card info-card my-1 mx-1">
-        <img src={pokemon.image_url} className="card-img-top" alt={"pokemon " + pokemon.name} />
+        <div className="mt-2 mx-auto">
+          <img src={pokemon.image_url} className="card-img-top" alt={"pokemon " + pokemon.name} />
+        </div>
         <div className="card-body">
-          <h5 className="poketype card-title font-weight-bold text-center">{pokemon.name} {formatIndex(pokemon.index)}</h5>
+          <h5 className="pokename card-title font-weight-bold text-center">{pokemon.name} {formatIndex(pokemon.index)}</h5>
           <table className="table table-bordered text-center text-capitalize mb-0">
             <tbody>
               {
