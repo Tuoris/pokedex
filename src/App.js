@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css'
+import './poketypes.scss'
 
 const API_PREFIX_URL = 'https://pokeapi.co/api/v2';
 const PAGE_SIZE = 12;
@@ -16,8 +17,9 @@ function PokeCard(props) {
           {
             props.types
               .map((type, index) => {
+                let poketypeClassName = `poketype-${type}`;
                 return <button
-                  className="poketype btn btn-primary m-1"
+                  className={"poketype btn m-1 " + poketypeClassName }
                   key={type}
                   onClick={() => props.pokemonSelectCallback({ index, type, ...props })}
                 >{type}</button>

@@ -2,8 +2,21 @@ body {
     background: #f0f0f0;
 }
 
-.pokename, .poketype {
+.pokename,
+.poketype {
     text-transform: capitalize;
+}
+
+.poketype,
+.poketype:hover,
+.poketype:focus {
+  color: white;
+  border-width: 0.2rem;
+  border-radius: 0;
+}
+
+.poketype:hover {
+  box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
 }
 
 .info-card {
