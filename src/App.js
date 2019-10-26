@@ -7,13 +7,15 @@ const PAGE_SIZE = 12;
 function PokeCard(props) {
   return (
     <div className="card">
-      <img src={props.image_url} className="card-img-top" alt={"pokemon" + props.name} />
-      <div className="card-body">
+      <div className="pokemon-thumbnail mt-2 mx-auto">
+        <img src={props.image_url} className="card-img-top img-fluid" alt={"pokemon" + props.name} />
+      </div>
+      <div className="card-body pt-2">
         <h5 className="pokename card-title text-center">{props.name}</h5>
         <div className="poketypes-wrapper">
           {
             props.types
-              .map(type => <button className="poketype btn btn-primary mx-1" key={type}>{type}</button>)
+              .map(type => <button className="poketype btn btn-primary m-1" key={type}>{type}</button>)
           }
         </div>
 
