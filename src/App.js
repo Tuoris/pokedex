@@ -107,7 +107,7 @@ class App extends React.Component {
               }
             </div>
             <div className="row">
-              <button className="button-load btn btn-primary mx-2">Load More</button>
+              <button className="button-load btn btn-primary mx-2" onClick={() => this.fetchPokemons()}>Load More</button>
             </div>
           </div>
           <div className="poke-info col-sm-4 px-1 py-1">
