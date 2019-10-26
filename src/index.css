@@ -51,7 +51,7 @@ body {
 
   .info-card {
     max-height: calc(100vh - 5rem);
-    overflow: scroll;
+    overflow-y: scroll;
   }
 
   .modal-back {
@@ -61,4 +61,13 @@ body {
   .pokeinfo-unselect {
     display: block;
   }
+}
+
+@media screen and (min-width: 769px) {
+    .info-card {
+        position: fixed;
+        max-height: calc(100vh - 8.5rem);
+        overflow-y: scroll;
+        width: 25%;
+    }
 }
