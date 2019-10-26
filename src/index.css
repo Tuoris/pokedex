@@ -42,6 +42,10 @@ body {
   display: none;
 }
 
+.pokemon-stat-name-cell {
+    width: 70%;
+}
+
 @media (max-width: 768px) {
   .poke-info {
     position: fixed;
