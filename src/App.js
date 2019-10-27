@@ -1,53 +1,13 @@
 import React from 'react';
 
 import PokemonCard from './PokemonCard'
+import PokemonInfo from './PokemonInfo'
 import './index.css'
 import './poketypes.scss'
 
 const API_PREFIX_URL = 'https://pokeapi.co/api/v2';
 const PAGE_SIZE = 12;
 
-
-function formatIndex(index) {
-  return '#' + index.toString().padStart(3, '0');
-}
-
-function PokeInfo(props) {
-  let { pokemon } = props;
-  let fields = {
-    "Type": (pokemon.type),
-    ...pokemon.stats
-  }
-  return (
-    <div>
-      <div className="card info-card my-1 mx-1">
-        <div className="mt-2 mx-auto">
-          <img src={pokemon.image_url} className="card-img-top" alt={"pokemon " + pokemon.name} />
-        </div>
-        <div className="card-body">
-          <h5 className="pokename card-title font-weight-bold text-center">{pokemon.name} {formatIndex(pokemon.index)}</h5>
-          <table className="table table-bordered text-center text-capitalize mb-0">
-            <tbody>
-              {
-                Object.keys(fields)
-                  .map(key => {
-                    return (<tr key={key}>
-                      <td class="pokemon-stat-name-cell">{key}</td>
-                      <td>{fields[key]}</td>
-                    </tr>)
-                  })
-              }
-            </tbody>
-          </table>
-          <div className="pokeinfo-unselect text-center mt-2">
-            <button className="btn btn-success" onClick={props.pokemonUnselectCallback}>Close</button>
-          </div>
-        </div>
-      </div>
-      <div className="modal-back" onClick={props.pokemonUnselectCallback}></div>
-    </div>
-  )
-}
 
 class App extends React.Component {
   constructor(props) {
@@ -136,7 +96,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="poke-info col-md-4 px-1 py-1">
-            {this.state.selected_pokemon ? <PokeInfo pokemon={this.state.selected_pokemon} pokemonUnselectCallback={() => this.UnselectPokemon()} /> : null}
+            {this.state.selected_pokemon ? <PokemonInfo pokemon={this.state.selected_pokemon} pokemonUnselectCallback={() => this.UnselectPokemon()} /> : null}
           </div>
         </div>
       </div>
