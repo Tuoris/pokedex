@@ -46,7 +46,7 @@ body {
     width: 70%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .poke-info {
     position: fixed;
     top: 0;
@@ -67,7 +67,7 @@ body {
   }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
   .info-card {
     position: fixed;
     max-height: calc(100vh - 8.5rem);

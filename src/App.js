@@ -77,7 +77,7 @@ class App extends React.Component {
       <div className="app container mb-4">
         <h1 className="text-center">Pokedex</h1>
         <div className="row">
-          <div className="poke-cards col-md-8 cold-md-8">
+          <div className="poke-cards col-md-8">
             <div className="row px-1 py-1">
               {
                 this.state.pokemons
