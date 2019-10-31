@@ -29,7 +29,7 @@ function PokemonInfo(props) {
                 Object.keys(fields)
                   .map(key => {
                     return (<tr key={key}>
-                      <td class="pokemon-stat-name-cell">{key}</td>
+                      <td className="pokemon-stat-name-cell">{key}</td>
                       <td>{fields[key]}</td>
                     </tr>)
                   })
